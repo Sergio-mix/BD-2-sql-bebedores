@@ -12,18 +12,16 @@ class Sql:
     def get(self, table):
         try:
             with self.connection.cursor() as cursor:
-                sql = "SELECT * FROM " + table
-                cursor.execute(sql)
+                cursor.execute("SELECT * FROM " + table)
                 result = cursor.fetchall()
                 return result
         except Exception as e:
             print(e)
 
-    def set(self, table, data):
+    def add(self, table, data):
         try:
             with self.connection.cursor() as cursor:
-                sql = "INSERT INTO " + table + " VALUES (" + data + ")"
-                cursor.execute(sql)
+                cursor.execute("INSERT INTO " + table + " VALUES (" + data + ")")
                 self.connection.commit()
         except Exception as e:
             print(e)

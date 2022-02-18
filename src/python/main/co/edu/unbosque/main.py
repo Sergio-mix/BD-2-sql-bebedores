@@ -19,24 +19,15 @@ apellidos = file.File().read(url="../../../../resource/doc/apellidos.txt")
 listaBebedores = []
 
 
-def aliasRamdom(nombres, apellidos):
+def aliasRamdom(nombres, apellidos, i):
     random_Nombre = random.randint(0, 454)
     random_Apellido = random.randint(0, 102)
-    return "bebedor " + nombres[random_Nombre] + " " + apellidos[random_Apellido]
-
-
-def searchAlias(alias, lista):
-    for i in lista:
-        if i == alias:
-            return True
-    return False
+    return "bebedor " + nombres[random_Nombre] + " " + apellidos[random_Apellido] + "_" + str(i) + "__"
 
 
 def generateAlias(size):
     for i in range(0, size):
-        alias = aliasRamdom(nombres, apellidos)
-        if not searchAlias(alias, listaBebedores):
-            listaBebedores.append(alias)
+        listaBebedores.append(aliasRamdom(nombres, apellidos, i))
 
 
 def generateGenero():
@@ -57,16 +48,12 @@ def get_rnd_date(start, end, fmt):
 
 
 try:
-    generateAlias(1000)
+    generateAlias(10_000)
     sql = sql.Sql()
     for i in listaBebedores:
-        date = str(get_rnd_date("1960-01-01", "2005-01-01", "%Y-%m-%d"))
-        alias = str(i)
-        data = "null, " + alias + ", " + date + ", " + generateGenero() + ", 0"
-        sql.set(
+        date = "'" + str(get_rnd_date("1960-01-01", "2005-01-01", "%Y-%m-%d")) + "'"
+        sql.add(
             table="bebedores",
-            data=data)
-
-    print(sql.get(table="bebedores"))
+            data="null, " + "'" + i + "'" + ", " + date + ", " + "'" + generateGenero() + "'" + ", 0")
 except Exception as e:
     print(e)
