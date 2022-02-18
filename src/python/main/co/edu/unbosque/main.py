@@ -48,6 +48,7 @@ def get_rnd_date(start, end, fmt):
 
 
 try:
+    print("Generando alias")
     generateAlias(10_000)
     sql = sql.Sql()
     for i in listaBebedores:
@@ -55,5 +56,7 @@ try:
         sql.add(
             table="bebedores",
             data="null, " + "'" + i + "'" + ", " + date + ", " + "'" + generateGenero() + "'" + ", 0")
+    print("Bebedores generados")
 except Exception as e:
     print(e)
+    print("Error al generar bebedores")
