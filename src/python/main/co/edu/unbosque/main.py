@@ -1,5 +1,3 @@
-from _ast import alias
-
 import file
 import sql
 import random
@@ -48,14 +46,16 @@ def get_rnd_date(start, end, fmt):
 
 
 try:
-    print("Generando alias")
-    generateAlias(10_000)
+    print("Generando alias...")
+    generateAlias(1_000)
     sql = sql.Sql()
+    aux = 1
     for i in listaBebedores:
         date = "'" + str(get_rnd_date("1960-01-01", "2005-01-01", "%Y-%m-%d")) + "'"
         sql.add(
             table="bebedores",
-            data="null, " + "'" + i + "'" + ", " + date + ", " + "'" + generateGenero() + "'" + ", 0")
+            data="null, " + "'" + i + "'" + ", " + date + ", " + "'" + generateGenero() + "'" + "," + aux)
+        aux += 1
     print("Bebedores generados")
 except Exception as e:
     print(e)
