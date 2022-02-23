@@ -5,7 +5,7 @@ class Sql:
     def __init__(self):
         self.connection = pymysql.connect(host='localhost',
                                           user='root',
-                                          password='elperri2021',
+                                          password='elperri2022',
                                           charset='utf8mb4',
                                           db='bebedores')
 
