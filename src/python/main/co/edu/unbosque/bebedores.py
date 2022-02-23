@@ -4,9 +4,10 @@ import sql
 
 
 class Bebedores:
-    def __init__(self, nombres, apellidos):
+    def __init__(self, nombres, apellidos, servezas):
         self.nombres = nombres
         self.apellidos = apellidos
+        self.servezas = servezas
 
     def aliasRamdom(self, nombres, apellidos, i):
         random_Nombre = random.randint(0, 454)
