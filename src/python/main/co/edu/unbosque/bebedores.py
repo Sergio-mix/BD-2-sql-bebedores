@@ -13,19 +13,13 @@ class Bebedores:
         random_Apellido = random.randint(0, 102)
         return "bebedor " + nombres[random_Nombre] + " " + apellidos[random_Apellido] + "_" + str(i) + "__"
 
-    def generateListAlias(self, size):
-        listaBebedores = []
-        for i in range(0, size):
-            listaBebedores.append(self.aliasRamdom(self.nombres, self.apellidos, i))
-        return listaBebedores
-
     def generateGenero(self):
         if random.randint(0, 1) == 0:
             return "M"
         else:
             return "F"
 
-    def get_rnd_date(start, end, fmt):
+    def get_rnd_date(self, start, end, fmt):
         s = datetime.strptime(start, fmt).date()
         e = datetime.strptime(end, fmt).date()
         delta = e - s
@@ -36,11 +30,11 @@ class Bebedores:
             data = sql.Sql()
             print("Generando bebedores...")
             aux = 1
-            for i in self.generateListAlias(size):
+            for i in range(0, size):
                 date = "'" + str(self.get_rnd_date("1960-01-01", "2005-01-01", "%Y-%m-%d")) + "'"
-
                 data.add(table=table,
-                         data="null, " + "'" + i + "'" + ", " + date + ", " + "'" + self.generateGenero() + "'" + "," + str(
+                         data="null, " + "'" + self.aliasRamdom(self.nombres, self.apellidos,
+                                                                i) + "'" + ", " + date + ", " + "'" + self.generateGenero() + "'" + "," + str(
                              aux))
                 aux += 1
                 print("Bebedores generados")
