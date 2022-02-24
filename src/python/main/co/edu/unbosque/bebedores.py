@@ -4,10 +4,11 @@ import sql
 
 
 class Bebedores:
-    def __init__(self, nombres, apellidos, servezas):
+    def __init__(self, nombres, apellidos, cervezas, bares):
         self.nombres = nombres
         self.apellidos = apellidos
-        self.servezas = servezas
+        self.cervezas = cervezas
+        self.bares = bares
 
     def aliasRamdom(self, nombres, apellidos, i):
         random_Nombre = random.randint(0, len(nombres) - 1)
@@ -26,7 +27,7 @@ class Bebedores:
         delta = e - s
         return s + timedelta(days=(random.random() * delta.days))
 
-    def generateBebedores(self, size, table):
+    def generate_Bebedores(self, size, table):
         try:
             data = sql.Sql()
             print("Generando bebedores...")
@@ -43,9 +44,44 @@ class Bebedores:
             print(e)
             print("Error al generar bebedores")
 
-    def generateServezas(self, size, table):
+    def generate_Cervezas(self, size, table):
         try:
             data = sql.Sql()
             print("Generando servezas...")
             for i in range(0, size):
-                data.add(table=table, data="null, " + "'" + self.servezas[random.randint(0, len(self.servezas) - 1)] + "', "+ str(random.randint(0,5)))
+                data.add(table=table,
+                         data="null, " + "'" + self.cervezas[random.randint(0, len(self.cervezas) - 1)] + "_" +
+                              self.cervezas[
+                                  random.randint(0, len(self.cervezas) - 1)] + "', " + str(
+                             random.randint(0, 5)))
+
+        except Exception as e:
+            print(e)
+            print("Error al generate Servezas")
+
+    def generate_Gustar(self, size, table, bebedores, cervezas):
+        try:
+            data = sql.Sql()
+            print("Generando Tabla de gusta")
+            for i in range(0, size):
+                data.add(table=table,
+                         data="null, " + ", '" + bebedores["id"][random.randint(0, len(bebedores) - 1)] + "', " +
+                              cervezas["id"][random.randint(0, len(cervezas) - 1)] + "_")
+        except Exception as e:
+            print(e)
+            print("Error al generate Gustar")
+
+    def generate_Bares(self, size, table):
+        try:
+            data = sql.Sql()
+            print("Generando Bares...")
+            for i in range(0, size):
+
+                data.add(table=table,
+                         data="null, " + "'" + self.aliasRamdom(self.nombres, self.apellidos,
+                                                                i) + "'" + ", " + "'" + self.generateGenero() + "'" + "," + str(
+                             random.randint(0, 5)))
+                print("Bares generados")
+        except Exception as e:
+            print(e)
+

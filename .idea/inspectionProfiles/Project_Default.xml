@@ -13,6 +13,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="sql.Sql" />
+          <option value="sql.SQL.get" />
         </list>
       </option>
     </inspection_tool>
