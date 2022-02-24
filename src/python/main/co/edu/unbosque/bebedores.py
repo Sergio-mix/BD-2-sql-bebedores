@@ -10,8 +10,8 @@ class Bebedores:
         self.servezas = servezas
 
     def aliasRamdom(self, nombres, apellidos, i):
-        random_Nombre = random.randint(0, 454)
-        random_Apellido = random.randint(0, 102)
+        random_Nombre = random.randint(0, len(nombres) - 1)
+        random_Apellido = random.randint(0, len(apellidos) - 1)
         return "bebedor " + nombres[random_Nombre] + " " + apellidos[random_Apellido] + "_" + str(i) + "__"
 
     def generateGenero(self):
@@ -42,3 +42,10 @@ class Bebedores:
         except Exception as e:
             print(e)
             print("Error al generar bebedores")
+
+    def generateServezas(self, size, table):
+        try:
+            data = sql.Sql()
+            print("Generando servezas...")
+            for i in range(0, size):
+                data.add(table=table, data="null, " + "'" + self.servezas[random.randint(0, len(self.servezas) - 1)] + "', "+ str(random.randint(0,5)))
